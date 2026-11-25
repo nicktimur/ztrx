@@ -978,7 +978,8 @@ fn workers() -> &'static Workers {
         more: std::sync::Condvar::new(),
     });
     STARTED.call_once(|| {
-        let n = std::thread::available_parallelism().map_or(4, |n| n.get() / 4).clamp(2, 6);
+        // ztrx: half the logical cores (was a quarter, at most 6).
+        let n = std::thread::available_parallelism().map_or(4, |n| n.get() / 2).clamp(2, 10);
         for i in 0..n {
             let _ = std::thread::Builder::new().name(format!("victory-wide-{i}")).spawn(move || {
                 let workers = WORKERS.get().expect("made above");

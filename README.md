@@ -56,6 +56,8 @@ turned back off by setting it to the value shown.
 | GPU re-hash passes joined into runs | `VICTORY_CARD_REHASH_RUNS=0` |
 | Pipeline wait budget per frame 24 ms instead of 500 ms (a missing pipeline skips its draw for a frame instead of stalling) | `VICTORY_PIPELINE_WAIT_MS=500` |
 | GPU compare/hash shader: one 256-thread group per 64 KiB piece instead of one thread | (code change) |
+| No EcoQoS throttling (hybrid CPUs keep the game on performance cores) and above-normal process priority | `VICTORY_PRIORITY=0` (priority only) |
+| Kept worker threads for snapshots/compares/merges: half the logical cores, up to 10 (was a quarter, up to 6) | (code change) |
 | Release build: fat LTO, one codegen unit, `x86-64-v3` (AVX2) | edit `Cargo.toml` / `.cargo/config.toml` |
 
 Check the compare shader on Windows with
